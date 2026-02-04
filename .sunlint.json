@@ -1,0 +1,17 @@
+{
+    "extends": "@sun/sunlint/recommended",
+    "rules": {
+        "C019": "error",
+        "C006": "warn",
+        "S005": "error",
+        "C024": "off",
+        "S055": "off"
+    },
+    "ignorePatterns": [
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/src/app/api/**"
+    ]
+}

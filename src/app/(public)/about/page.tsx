@@ -1,15 +1,15 @@
 'use client'
 
-import { Card, Row, Col, Timeline, Avatar } from 'antd'
 import {
+  CheckCircleOutlined,
+  GlobalOutlined,
   RocketOutlined,
   SafetyOutlined,
-  ThunderboltOutlined,
   TeamOutlined,
+  ThunderboltOutlined,
   TrophyOutlined,
-  GlobalOutlined,
-  CheckCircleOutlined,
 } from '@ant-design/icons'
+import { Card, Col, Row, Timeline } from 'antd'
 import Link from 'next/link'
 
 export default function AboutPage() {

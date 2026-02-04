@@ -1,14 +1,13 @@
 'use client'
 
-import { Card, Row, Col, Switch, Button, Select, Divider, message } from 'antd'
 import {
   BellOutlined,
-  LockOutlined,
-  GlobalOutlined,
   EyeOutlined,
+  LockOutlined,
   SafetyOutlined,
   ThunderboltOutlined,
 } from '@ant-design/icons'
+import { Button, Card, Col, Divider, message, Row, Select, Switch } from 'antd'
 import { useState } from 'react'
 
 export default function SettingsPage() {
@@ -267,9 +266,7 @@ export default function SettingsPage() {
               <div className="flex items-center justify-between rounded-lg border-2 border-red-200 bg-red-50 p-4">
                 <div>
                   <div className="font-semibold text-red-800">Delete Account</div>
-                  <div className="text-sm text-red-600">
-                    Permanently delete your account and all data
-                  </div>
+                  <div className="text-sm text-red-600">Delete your account and all data</div>
                 </div>
                 <Button danger>Delete</Button>
               </div>

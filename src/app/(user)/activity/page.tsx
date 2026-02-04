@@ -1,13 +1,12 @@
 'use client'
 
-import { Card, Row, Col, Timeline, Table, Tag, Progress, Statistic } from 'antd'
 import {
-  ClockCircleOutlined,
-  CheckCircleOutlined,
-  SyncOutlined,
-  CloseCircleOutlined,
   ArrowUpOutlined,
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  SyncOutlined
 } from '@ant-design/icons'
+import { Card, Col, Progress, Row, Statistic, Table, Tag, Timeline } from 'antd'
 
 export default function ActivityPage() {
   const recentActivities = [

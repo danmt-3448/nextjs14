@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, Row, Col, Avatar, Button, Descriptions, Upload, message, Form, Input } from 'antd'
-import { UserOutlined, CameraOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons'
+import { CameraOutlined, EditOutlined, SaveOutlined, UserOutlined } from '@ant-design/icons'
+import { Avatar, Button, Card, Col, Descriptions, Form, Input, Row, message } from 'antd'
 import { useState } from 'react'
 
 export default function ProfilePage() {

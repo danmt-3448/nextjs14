@@ -1,7 +1,7 @@
 'use client'
 
-import { Button, Form, Input } from 'antd'
 import { USER_ROLES, useLogin } from '@/domains/auth'
+import { Button, Form, Input } from 'antd'
 
 export default function LoginPage() {
   const [form] = Form.useForm()

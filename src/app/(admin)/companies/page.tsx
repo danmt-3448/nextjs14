@@ -1,17 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import { Button, Table, Tag, Space, Input, Modal, message } from 'antd'
+import { PageHeader } from '@/components/layout'
+import { Company, useDeleteCompany, useGetCompanies } from '@/domains/admin'
 import {
-  PlusOutlined,
-  EditOutlined,
   DeleteOutlined,
+  EditOutlined,
   EyeOutlined,
+  PlusOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
+import { Button, Input, Modal, Space, Table, Tag } from 'antd'
 import { useRouter } from 'next/navigation'
-import { PageHeader } from '@/components/layout'
-import { useGetCompanies, useDeleteCompany, Company } from '@/domains/admin'
+import { useState } from 'react'
 
 const { Search } = Input
 

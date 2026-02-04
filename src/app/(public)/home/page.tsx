@@ -1,14 +1,14 @@
 'use client'
 
-import { Card, Row, Col, Statistic, Progress } from 'antd'
 import {
-  ArrowUpOutlined,
   ArrowDownOutlined,
-  UserOutlined,
-  ShoppingCartOutlined,
+  ArrowUpOutlined,
   DollarOutlined,
+  ShoppingCartOutlined,
   TeamOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
+import { Card, Col, Progress, Row, Statistic } from 'antd'
 import Link from 'next/link'
 
 export default function HomePage() {

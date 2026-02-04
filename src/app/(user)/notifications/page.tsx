@@ -1,14 +1,14 @@
 'use client'
 
-import { Card, Row, Col, Badge, List, Avatar, Button, Tag, Tabs } from 'antd'
 import {
   BellOutlined,
   CheckCircleOutlined,
   ClockCircleOutlined,
+  CloseCircleOutlined,
   InfoCircleOutlined,
   WarningOutlined,
-  CloseCircleOutlined,
 } from '@ant-design/icons'
+import { Badge, Button, Card, Col, List, Row, Tabs } from 'antd'
 
 export default function NotificationsPage() {
   const notifications = [

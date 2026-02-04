@@ -1,11 +1,11 @@
 'use client'
 
-import { Avatar, Button, Dropdown, MenuProps } from 'antd'
-import { UserOutlined, LogoutOutlined, SettingOutlined, ShopOutlined } from '@ant-design/icons'
-import { useRouter } from 'next/navigation'
-import { useLogout } from '@/domains/auth'
 import { ROUTES } from '@/constants'
+import { useLogout } from '@/domains/auth'
 import StorageUtils from '@/lib/storage'
+import { LogoutOutlined, SettingOutlined, ShopOutlined, UserOutlined } from '@ant-design/icons'
+import { Avatar, Button, Dropdown, MenuProps } from 'antd'
+import { useRouter } from 'next/navigation'
 
 interface HeaderProps {
   title?: string
@@ -22,7 +22,7 @@ export const Header = ({
   const { mutate: logout, isPending } = useLogout()
   const role = StorageUtils.getCookie('auth-role')
   const canSeeAdmin = showAdminButton && role === 'admin'
-  const displayName = role === 'admin' ? 'Admin' : 'User'
+  const userLabel = role === 'admin' ? 'Admin' : 'User'
 
   const items: MenuProps['items'] = [
     {
@@ -73,7 +73,7 @@ export const Header = ({
                 icon={<Avatar size="small" icon={<UserOutlined />} />}
                 loading={isPending}
               >
-                <span className="hidden sm:inline">{displayName}</span>
+                <span className="hidden sm:inline">{userLabel}</span>
               </Button>
             </Dropdown>
           </div>
