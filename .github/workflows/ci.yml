@@ -48,4 +48,4 @@ jobs:
         with:
           node-version: '20'
       - run: npm install -g @sun-asterisk/sunlint
-      - run: sunlint --all --changed-files --input=. --github-annotate
+      - run: sunlint --all --input=. --github-annotate
