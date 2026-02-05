@@ -9,7 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
-    "sunlint": "sunlint --config=.sunlint.json --output-html=report.html --input=/src --github-annotate || true",
+    "sunlint": "sunlint --config=.sunlint.json --output-html=report.html --input=src --github-annotate || true",
     "sunlint:changed": "sunlint --config=.sunlint.json --output-html=report.html --changed-files --github-annotate || true",
     "sunlint:security": "sunlint --security --input=src"
   },
