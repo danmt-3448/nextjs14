@@ -48,4 +48,6 @@ jobs:
         with:
           node-version: '20'
       - run: npm install -g @sun-asterisk/sunlint
-      - run: sunlint --all --input=. --github-annotate || true
+      - run: sunlint --config=.sunlint.json --output-html=report.html --input=/src --github-annotate || true
+      - name: upload report
+        run: sunlint --architecture --input=src --output-summary=sunlint-comprehensive-report.json --upload-report

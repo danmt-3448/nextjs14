@@ -564,10 +564,10 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.15.0.tgz#8184bcb37791e6d3c3c13a9bfbe4af263f66665f"
   integrity sha512-ojSshQPKwVvSMR8yT2L/QtUkV5SXi/IfDiJ4/8d6UbTPjiHVmxZzUAzGD8Tzks1b9+qQkZa0isUOvYObedITaw==
 
-"@sun-asterisk/sunlint@^1.3.39":
-  version "1.3.39"
-  resolved "https://registry.yarnpkg.com/@sun-asterisk/sunlint/-/sunlint-1.3.39.tgz#a00aa26e32bd35e726b9cfc8df122b1bd5eeac5b"
-  integrity sha512-xeZWPxwO+LKywnt8R3AcHoHJb2/yawklDbLbbupuY98HnQtES/g+bZMzGVbKJmvcq8nz3J2TOKjO32iwHt8FdA==
+"@sun-asterisk/sunlint@^1.3.41":
+  version "1.3.41"
+  resolved "https://registry.yarnpkg.com/@sun-asterisk/sunlint/-/sunlint-1.3.41.tgz#2c752b52a06c5f2eb021c60838e1a179ad3c2328"
+  integrity sha512-Abb3jbeuPNgTQt8KqPhNBCTVUf6vgFfZaXH7EJgZ3IrOX1D9+HH2GvzUKxxMJDsyUhtBNlBQCpOTSNpd/l8C4Q==
   dependencies:
     "@babel/parser" "^7.25.8"
     "@octokit/rest" "^22.0.0"
