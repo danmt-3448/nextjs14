@@ -9,4 +9,4 @@ jobs:
         with:
           node-version: '20'
       - run: npm install -g @sun-asterisk/sunlint
-      - run: sunlint --config=.sunlint.json --output-html=report.html --input=src --github-annotate || true
+      - run: sunlint --config=.sunlint.json --output-html=report.html --input=src
