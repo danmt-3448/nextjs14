@@ -10,20 +10,16 @@ const nextConfig = {
   // Output optimization
   output: 'standalone',
   
-  // Compiler optimizations (not supported in Turbopack)
-  ...(!process.env.TURBOPACK && {
-    compiler: {
-      removeConsole: process.env.NODE_ENV === 'production' ? {
-        exclude: ['error', 'warn'],
-      } : false,
-    },
-  }),
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
   
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['antd', '@ant-design/icons', 'lodash'],
-    // Turbopack for faster dev server (Rust-based bundler)
-    // Note: Enable via `yarn dev:turbo`, not in config
   },
   
   // Modularize imports để tree-shake tốt hơn

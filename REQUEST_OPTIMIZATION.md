@@ -22,7 +22,7 @@ Login: 3 requests
    - RSC payload fetch
 
 2. **Fast Refresh** (349ms)
-   - Turbopack checking for changes
+   - Next.js checking for changes
    - Dev mode only
 
 3. **HMR Update** (76ms)
@@ -94,8 +94,7 @@ Then check Network tab → Should see **only 1 request** per page! ✅
 
 | Environment | Requests | Why |
 |-------------|----------|-----|
-| **Dev (Webpack)** | 2-3 | Slow bundler + HMR |
-| **Dev (Turbopack)** | 2-3 | Fast bundler + HMR |
+| **Dev (Webpack)** | 2-3 | Bundler + HMR |
 | **Production** | **1** | Pre-compiled, no HMR |
 
 ---
