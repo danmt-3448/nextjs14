@@ -11,61 +11,68 @@ import {
 } from '@ant-design/icons'
 import { useRouter, usePathname } from 'next/navigation'
 import { ROUTES } from '@/constants'
-import StorageUtils from '@/lib/storage'
+import { useAuthContext } from '@/contexts'
+import { useMemo, useCallback, memo } from 'react'
 
-export const Sidebar = () => {
+export const Sidebar = memo(() => {
   const router = useRouter()
   const pathname = usePathname()
-  const role = StorageUtils.getCookie('auth-role')
+  const { role } = useAuthContext()
   const isAdmin = role === 'admin'
 
-  const userItems = [
+  const handleNavigate = useCallback((path: string) => {
+    router.push(path)
+  }, [router])
+
+  const userItems = useMemo(() => [
     {
       key: ROUTES.DASHBOARD,
       icon: <DashboardOutlined />,
       label: 'Dashboard',
-      onClick: () => router.push(ROUTES.DASHBOARD),
+      onClick: () => handleNavigate(ROUTES.DASHBOARD),
     },
     {
       key: ROUTES.ACTIVITY,
       icon: <ThunderboltOutlined />,
       label: 'Activity',
-      onClick: () => router.push(ROUTES.ACTIVITY),
+      onClick: () => handleNavigate(ROUTES.ACTIVITY),
     },
     {
       key: ROUTES.NOTIFICATIONS,
       icon: <BellOutlined />,
       label: 'Notifications',
-      onClick: () => router.push(ROUTES.NOTIFICATIONS),
+      onClick: () => handleNavigate(ROUTES.NOTIFICATIONS),
     },
     {
       key: ROUTES.PROFILE,
       icon: <UserOutlined />,
       label: 'Profile',
-      onClick: () => router.push(ROUTES.PROFILE),
+      onClick: () => handleNavigate(ROUTES.PROFILE),
     },
     {
       key: ROUTES.SETTINGS,
       icon: <SettingOutlined />,
       label: 'Settings',
-      onClick: () => router.push(ROUTES.SETTINGS),
+      onClick: () => handleNavigate(ROUTES.SETTINGS),
     },
-  ]
+  ], [handleNavigate])
 
-  const adminItems = [
+  const adminItems = useMemo(() => [
     {
       key: ROUTES.COMPANIES,
       icon: <TeamOutlined />,
       label: 'Companies',
-      onClick: () => router.push(ROUTES.COMPANIES),
+      onClick: () => handleNavigate(ROUTES.COMPANIES),
     },
-  ]
+  ], [handleNavigate])
 
-  const menuItems = isAdmin
-    ? [...userItems, { type: 'divider' as const }, ...adminItems]
-    : userItems
+  const menuItems = useMemo(() => {
+    return isAdmin
+      ? [...userItems, { type: 'divider' as const }, ...adminItems]
+      : userItems
+  }, [isAdmin, userItems, adminItems])
 
-  const selectedKey = (() => {
+  const selectedKey = useMemo(() => {
     if (pathname.startsWith(ROUTES.COMPANIES)) return ROUTES.COMPANIES
     if (pathname.startsWith(ROUTES.ACTIVITY)) return ROUTES.ACTIVITY
     if (pathname.startsWith(ROUTES.NOTIFICATIONS)) return ROUTES.NOTIFICATIONS
@@ -73,7 +80,7 @@ export const Sidebar = () => {
     if (pathname.startsWith(ROUTES.SETTINGS)) return ROUTES.SETTINGS
     if (pathname.startsWith(ROUTES.DASHBOARD)) return ROUTES.DASHBOARD
     return pathname
-  })()
+  }, [pathname])
 
   return (
     <aside className="h-full border-r bg-white">
@@ -88,4 +95,7 @@ export const Sidebar = () => {
       </div>
     </aside>
   )
-}
+})
+
+Sidebar.displayName = 'Sidebar'
+

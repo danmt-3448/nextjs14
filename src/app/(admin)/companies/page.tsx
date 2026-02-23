@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons'
 import { Button, Input, Modal, Space, Table, Tag } from 'antd'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 
 const { Search } = Input
 
@@ -21,7 +21,7 @@ export default function CompaniesPage() {
   const { mutate: deleteCompany } = useDeleteCompany()
   const [searchText, setSearchText] = useState('')
 
-  const handleDelete = (id: string, name: string) => {
+  const handleDelete = useCallback((id: string, name: string) => {
     Modal.confirm({
       title: 'Delete Company',
       content: `Are you sure you want to delete "${name}"?`,
@@ -32,10 +32,15 @@ export default function CompaniesPage() {
         deleteCompany(id)
       },
     })
-  }
+  }, [deleteCompany])
 
-  const filteredCompanies = companies?.filter((company) =>
-    company.name.toLowerCase().includes(searchText.toLowerCase())
+  // Memoize filtered companies to prevent recalculation on every render
+  const filteredCompanies = useMemo(
+    () =>
+      companies?.filter((company) =>
+        company.name.toLowerCase().includes(searchText.toLowerCase())
+      ),
+    [companies, searchText]
   )
 
   const columns = [

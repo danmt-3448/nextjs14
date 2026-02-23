@@ -4,9 +4,12 @@ import { ProtectedRoute } from '@/components/shared'
 import { Header, Sidebar } from '@/components/layout'
 import { USER_ROLES } from '@/domains/auth/server'
 
+// Move outside component to avoid creating new array on every render
+const ALLOWED_ROLES = [USER_ROLES.USER, USER_ROLES.ADMIN]
+
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ProtectedRoute allowedRoles={[USER_ROLES.USER, USER_ROLES.ADMIN]}>
+    <ProtectedRoute allowedRoles={ALLOWED_ROLES}>
       <div className="min-h-screen bg-gray-50">
         <Header />
         <div className="flex">

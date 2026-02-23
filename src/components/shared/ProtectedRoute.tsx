@@ -1,57 +1,52 @@
 'use client'
 
-import { useEffect, useState, ReactNode } from 'react'
+import { useEffect, ReactNode, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Spin } from 'antd'
-import StorageUtils from '@/lib/storage'
 import { ROUTES } from '@/constants'
 import type { UserRole } from '@/domains/auth/server'
+import { useAuthContext } from '@/contexts/AuthContext'
 
-interface AuthCheckProps {
+interface ProtectedRouteProps {
   children: ReactNode
-  fallback?: ReactNode
   allowedRoles?: UserRole[]
   redirectTo?: string
 }
 
-export const AuthCheck = ({ children, fallback, allowedRoles, redirectTo }: AuthCheckProps) => {
+export const ProtectedRoute = ({ children, allowedRoles, redirectTo }: ProtectedRouteProps) => {
   const router = useRouter()
-  const [isChecking, setIsChecking] = useState(true)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const { isAuthenticated, role, isLoading } = useAuthContext()
+  const hasRedirected = useRef(false)
 
   useEffect(() => {
-    const token = StorageUtils.getCookie('auth-token')
-    const role = StorageUtils.getCookie('auth-role')
+    // Skip if loading or already redirected
+    if (isLoading || hasRedirected.current) return
 
-    if (!token) {
+    if (!isAuthenticated) {
+      hasRedirected.current = true
       router.replace(ROUTES.LOGIN)
-      setIsChecking(false)
       return
     }
 
-    if (allowedRoles && allowedRoles.length > 0) {
-      const hasAccess = allowedRoles.includes(role as UserRole)
-      if (!hasAccess) {
-        router.replace(redirectTo || ROUTES.DASHBOARD)
-        setIsChecking(false)
-        return
-      }
+    if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(role as UserRole)) {
+      hasRedirected.current = true
+      router.replace(redirectTo || ROUTES.DASHBOARD)
     }
+  }, [isAuthenticated, role, isLoading])
 
-    setIsAuthenticated(true)
-    setIsChecking(false)
-  }, [router, allowedRoles, redirectTo])
+  // Reset redirect flag when navigating to a new route
+  useEffect(() => {
+    hasRedirected.current = false
+  }, [allowedRoles, redirectTo])
 
-  if (isChecking) {
+  if (isLoading) {
     return (
-      fallback || (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50">
-          <div className="text-center">
-            <Spin size="large" />
-            <p className="mt-4 text-gray-500">Checking authentication...</p>
-          </div>
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <Spin size="large" />
+          <p className="mt-4 text-gray-500">Checking authentication...</p>
         </div>
-      )
+      </div>
     )
   }
 
@@ -59,7 +54,10 @@ export const AuthCheck = ({ children, fallback, allowedRoles, redirectTo }: Auth
     return null
   }
 
+  if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(role as UserRole)) {
+    return null
+  }
+
   return <>{children}</>
 }
 
-export const ProtectedRoute = AuthCheck

@@ -24,7 +24,7 @@ import {
   Tag,
 } from 'antd'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 const { TextArea } = Input
@@ -50,6 +50,7 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
     resolver: zodResolver(updateCompanySchema),
   })
 
+  // Only reset form when company data changes, not when reset function changes
   useEffect(() => {
     if (company) {
       reset({
@@ -60,7 +61,7 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
         status: company.status,
       })
     }
-  }, [company, reset])
+  }, [company]) // Removed reset from dependencies
 
   const onSubmit = (data: UpdateCompanyFormData) => {
     updateCompany(data, {

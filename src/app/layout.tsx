@@ -4,8 +4,8 @@ import { Providers } from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'NextJS 15 App',
-  description: 'Built with Next.js 15, TypeScript, Ant Design, and TanStack Query',
+  title: 'NextJS 14 App',
+  description: 'Built with Next.js 14, TypeScript, Ant Design, and TanStack Query',
 }
 
 export default function RootLayout({

@@ -8,7 +8,7 @@ import {
   ThunderboltOutlined,
 } from '@ant-design/icons'
 import { Button, Card, Col, Divider, message, Row, Select, Switch } from 'antd'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 
 export default function SettingsPage() {
   const [notifications, setNotifications] = useState({
@@ -18,9 +18,14 @@ export default function SettingsPage() {
     weeklyReport: true,
   })
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     message.success('Settings saved successfully!')
-  }
+  }, [])
+
+  // Memoize notification update handlers
+  const updateNotification = useCallback((key: keyof typeof notifications, value: boolean) => {
+    setNotifications(prev => ({ ...prev, [key]: value }))
+  }, [])
 
   return (
     <div className="space-y-6">
@@ -50,7 +55,7 @@ export default function SettingsPage() {
                 </div>
                 <Switch
                   checked={notifications.email}
-                  onChange={(checked) => setNotifications({ ...notifications, email: checked })}
+                  onChange={(checked) => updateNotification('email', checked)}
                 />
               </div>
               <Divider className="my-3" />
@@ -61,7 +66,7 @@ export default function SettingsPage() {
                 </div>
                 <Switch
                   checked={notifications.push}
-                  onChange={(checked) => setNotifications({ ...notifications, push: checked })}
+                  onChange={(checked) => updateNotification('push', checked)}
                 />
               </div>
               <Divider className="my-3" />
@@ -72,7 +77,7 @@ export default function SettingsPage() {
                 </div>
                 <Switch
                   checked={notifications.sms}
-                  onChange={(checked) => setNotifications({ ...notifications, sms: checked })}
+                  onChange={(checked) => updateNotification('sms', checked)}
                 />
               </div>
               <Divider className="my-3" />
@@ -83,9 +88,7 @@ export default function SettingsPage() {
                 </div>
                 <Switch
                   checked={notifications.weeklyReport}
-                  onChange={(checked) =>
-                    setNotifications({ ...notifications, weeklyReport: checked })
-                  }
+                  onChange={(checked) => updateNotification('weeklyReport', checked)}
                 />
               </div>
             </div>

@@ -1,2 +1,2 @@
 export * from './ErrorBoundary'
-export { AuthCheck, ProtectedRoute } from './ProtectedRoute'
+export { ProtectedRoute } from './ProtectedRoute'

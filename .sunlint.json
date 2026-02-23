@@ -13,5 +13,13 @@
         "**/dist/**",
         "**/build/**",
         "**/src/app/api/**"
-    ]
+    ],
+    "languages": {
+        "typescript": {
+            "include": [
+                "**/*.ts",
+                "**/*.tsx"
+            ]
+        }
+    }
 }
