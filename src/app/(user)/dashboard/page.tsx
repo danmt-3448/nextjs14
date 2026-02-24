@@ -1,11 +1,16 @@
 'use client'
 
-import { Card, List, Spin, Alert } from 'antd'
+
+import { Card, List, Spin, Alert, Pagination } from 'antd'
+import { useState } from 'react'
 import { useGetPosts } from '@/domains/public'
 import { PageHeader } from '@/components/layout'
 
+
 export default function DashboardPage() {
-  const { data: posts, isLoading, error } = useGetPosts()
+  const [page, setPage] = useState(1)
+  const limit = 10
+  const { data: posts, isLoading, error } = useGetPosts({ page, limit })
 
   if (isLoading) {
     return (
@@ -68,6 +73,16 @@ export default function DashboardPage() {
           </List.Item>
         )}
       />
+
+      <div className="flex justify-center mt-8">
+        <Pagination
+          current={page}
+          pageSize={limit}
+          total={100} // JSONPlaceholder có 100 posts
+          onChange={setPage}
+          showSizeChanger={false}
+        />
+      </div>
     </div>
   )
 }
