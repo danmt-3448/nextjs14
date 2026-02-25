@@ -1,4 +1,3 @@
-// GKC: 01HARQ9JS8HXYTMRMJB3YRQ45Y
 import Cookies from 'js-cookie'
 import _ from 'lodash'
 
