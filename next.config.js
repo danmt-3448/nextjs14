@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
-const isTurbo = !!process.env.TURBOPACK;
-
+const isTurbo = !!process.env.TURBOPACK
 const nextConfig = {
   reactStrictMode: false,
   transpilePackages: ['antd', '@ant-design/nextjs-registry'],
@@ -10,7 +9,13 @@ const nextConfig = {
   output: 'standalone',
 
   experimental: {
-    optimizePackageImports: ['antd', '@ant-design/icons', 'lodash'],
+    optimizePackageImports: ['antd', '@ant-design/icons', 'lodash', '@tanstack/react-query'],
+    cssChunking: 'loose',
+    turbo: {
+      dev: {
+        memoryLimit: 4096,
+      },
+    },
   },
 
   modularizeImports: {
@@ -24,12 +29,12 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
   },
-};
+}
 
 if (!isTurbo) {
   nextConfig.compiler = {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
-  };
+  }
 
   nextConfig.webpack = (config, { isServer, dev }) => {
     if (dev) {
@@ -38,22 +43,22 @@ if (!isTurbo) {
         buildDependencies: {
           config: [__filename],
         },
-      };
+      }
     }
 
     if (process.env.ANALYZE === 'true' && !isServer) {
-      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
       config.plugins.push(
         new BundleAnalyzerPlugin({
           analyzerMode: 'static',
           openAnalyzer: true,
           reportFilename: '../analyze.html',
         })
-      );
+      )
     }
 
-    return config;
-  };
+    return config
+  }
 }
 
-module.exports = nextConfig;
+module.exports = nextConfig
